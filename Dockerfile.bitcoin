@@ -1,0 +1,20 @@
+# Use an official Ubuntu as a base image
+FROM ubuntu:22.04
+
+# Install Bitcoin Core dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    gpg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download and compile Bitcoin Core
+RUN mkdir -p /usr/src/bitcoin \
+    && cd /usr/src/bitcoin \
+    && wget https://bitcoin.org/bin/bitcoin-core-25.0/bitcoin-25.0-x86_64-linux-gnu.tar.gz \
+    && tar -xzf bitcoin-25.0-x86_64-linux-gnu.tar.gz
+
+# Expose Bitcoin Core ports
+EXPOSE 8333 8332
+
+# Start Bitcoin Core daemon
+CMD ["/usr/src/bitcoin/bitcoin-25.0/bin/bitcoind", "-printtoconsole"]

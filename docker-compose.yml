@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  bitcoin-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.bitcoin
+    image: bitcoin-core-node
+    container_name: bitcoin-core-node
+    ports:
+      - "8333:8333"
+      - "8332:8332"
+    volumes:
+      - bitcoin-data:/data
+
+volumes:
+  bitcoin-data:
