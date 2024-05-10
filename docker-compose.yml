@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.bitcoin
-    image: bitcoin-core-node
     container_name: bitcoin-core-node
     ports:
       - "8333:8333"
